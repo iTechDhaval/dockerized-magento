@@ -64,9 +64,6 @@ function runForever() {
 	done
 }
 
-# Fix the www-folder permissions
-chgrp -R 33 /var/www/html
-
 # Check if the MAGENTO_ROOT direcotry has been specified
 if [ -z "$MAGENTO_ROOT" ]
 then
@@ -96,6 +93,9 @@ then
 	runForever
 	exit 0
 fi
+
+# Fix the www-folder permissions
+chgrp -RP 33 /var/www/html
 
 echo "Preparing the Magerun Configuration"
 substitute-env-vars.sh /etc /etc/n98-magerun.yaml.tmpl
